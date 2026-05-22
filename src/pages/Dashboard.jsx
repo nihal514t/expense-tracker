@@ -5,21 +5,15 @@ import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 
 function Dashboard() {
+  const [expenses, setExpenses] = useState(() => {
+    const savedExpenses = localStorage.getItem("expenses");
 
-const [expenses, setExpenses] = useState(() => {
-  const savedExpenses = localStorage.getItem("expenses");
+    return savedExpenses ? JSON.parse(savedExpenses) : [];
+  });
 
-  return savedExpenses
-    ? JSON.parse(savedExpenses)
-    : [];
-});
-
-useEffect(() => {
-  localStorage.setItem(
-    "expenses",
-    JSON.stringify(expenses)
-  );
-}, [expenses]);
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
 
   const addExpense = (expense) => {
     setExpenses([
@@ -30,25 +24,16 @@ useEffect(() => {
       },
     ]);
   };
-const deleteExpense = (id) => {
-  setExpenses(
-    expenses.filter((expense) => expense.id !== id)
-  );
-};
+  const deleteExpense = (id) => {
+    setExpenses(expenses.filter((expense) => expense.id !== id));
+  };
   return (
     <DashboardLayout>
-
-      <h1 className="text-4xl font-bold mb-6">
-        Dashboard
-      </h1>
+      <h1 className="text-4xl font-bold mb-6">Dashboard</h1>
 
       <ExpenseForm addExpense={addExpense} />
 
-     <ExpenseList
-  expenses={expenses}
-  deleteExpense={deleteExpense}
-/>
-
+      <ExpenseList expenses={expenses} deleteExpense={deleteExpense} />
     </DashboardLayout>
   );
 }
