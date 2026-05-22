@@ -1,4 +1,6 @@
 import DashboardLayout from "../layouts/DashboardLayout";
+import ExpenseForm from "../components/ExpenseForm";
+import ExpenseList from "../components/ExpenseList";
 
 function Dashboard() {
   return (
@@ -8,39 +10,9 @@ function Dashboard() {
         Dashboard
       </h1>
 
-      <div className="grid grid-cols-3 gap-6">
+      <ExpenseForm />
 
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <h2 className="text-gray-500 mb-2">
-            Total Balance
-          </h2>
-
-          <p className="text-3xl font-bold text-green-600">
-            ₹25,000
-          </p>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <h2 className="text-gray-500 mb-2">
-            Total Income
-          </h2>
-
-          <p className="text-3xl font-bold text-blue-600">
-            ₹40,000
-          </p>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <h2 className="text-gray-500 mb-2">
-            Total Expense
-          </h2>
-
-          <p className="text-3xl font-bold text-red-600">
-            ₹15,000
-          </p>
-        </div>
-
-      </div>
+      <ExpenseList />
 
     </DashboardLayout>
   );
