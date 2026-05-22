@@ -1,8 +1,27 @@
+import { useState } from "react";
+
 import DashboardLayout from "../layouts/DashboardLayout";
 import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 
 function Dashboard() {
+
+  const [expenses, setExpenses] = useState([]);
+
+  const addExpense = (expense) => {
+    setExpenses([
+      ...expenses,
+      {
+        id: Date.now(),
+        ...expense,
+      },
+    ]);
+  };
+const deleteExpense = (id) => {
+  setExpenses(
+    expenses.filter((expense) => expense.id !== id)
+  );
+};
   return (
     <DashboardLayout>
 
@@ -10,9 +29,12 @@ function Dashboard() {
         Dashboard
       </h1>
 
-      <ExpenseForm />
+      <ExpenseForm addExpense={addExpense} />
 
-      <ExpenseList />
+     <ExpenseList
+  expenses={expenses}
+  deleteExpense={deleteExpense}
+/>
 
     </DashboardLayout>
   );

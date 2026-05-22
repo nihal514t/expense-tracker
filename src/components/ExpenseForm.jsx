@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ExpenseForm() {
+function ExpenseForm({addExpense}) {
 
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -13,10 +13,10 @@ function ExpenseForm() {
       return;
     }
 
-    console.log({
-      title,
-      amount,
-    });
+   addExpense({
+  title,
+  amount,
+});
 
     setTitle("");
     setAmount("");
