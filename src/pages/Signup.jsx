@@ -14,7 +14,7 @@ function Signup() {
 
            <input
             type="text"
-            placeholder="Enter Name"
+            placeholder="Enter Username"
             className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           
@@ -25,6 +25,12 @@ function Signup() {
           />
 
           <input
+            type="password"
+            placeholder="Enter password"
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+           
+           <input
             type="password"
             placeholder="Enter password"
             className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"

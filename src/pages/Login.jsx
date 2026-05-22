@@ -1,6 +1,21 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Login() {
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const handleLogin = (e) => {
+
+  e.preventDefault();
+
+ if (!email || !password) {
+      alert("Fill all fields");
+      return;
+    }
+
+  console.log(email);
+  console.log(password);
+};
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-xl shadow-md w-[350px]">
@@ -9,22 +24,27 @@ function Login() {
           Login
         </h1>
 
-        <form className="flex flex-col gap-4">
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
           
           <input
             type="email"
             placeholder="Enter email"
             className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <input
             type="password"
             placeholder="Enter password"
             className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <button
             className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition"
+         
           >
             Login
           </button>
@@ -45,5 +65,6 @@ function Login() {
     </div>
   );
 }
+
 
 export default Login;
