@@ -4,6 +4,7 @@ function ExpenseForm({addExpense}) {
 
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
