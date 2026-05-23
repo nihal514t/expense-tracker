@@ -1,6 +1,8 @@
 import { useExpense } from "../context/ExpenseContext";
-function ExpenseList() {
-  const { expenses, deleteExpense, setEditingExpense } = useExpense();
+
+function ExpenseList({ expenses }) {
+  const { deleteExpense, setEditingExpense } = useExpense();
+
   return (
     <div className="bg-white p-6 rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-4">Recent Expenses</h2>
