@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
-function ExpenseForm({ addExpense }) {
+function ExpenseForm({ addExpense, editingExpense }) {
+  console.log(editingExpense);
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
+  useEffect(() => {
+  if (editingExpense) {
+
+    setTitle(editingExpense.title);
+
+    setAmount(editingExpense.amount);
+
+    setCategory(editingExpense.category);
+  }
+}, [editingExpense]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

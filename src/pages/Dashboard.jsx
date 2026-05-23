@@ -18,7 +18,25 @@ function Dashboard() {
     localStorage.setItem("expenses", JSON.stringify(expenses));
   }, [expenses]);
 
-  const addExpense = (expense) => {
+const addExpense = (expense) => {
+
+  if (editingExpense) {
+
+    setExpenses(
+      expenses.map((item) =>
+        item.id === editingExpense.id
+          ? {
+              ...item,
+              ...expense,
+            }
+          : item
+      )
+    );
+
+    setEditingExpense(null);
+
+  } else {
+
     setExpenses([
       ...expenses,
       {
@@ -26,7 +44,9 @@ function Dashboard() {
         ...expense,
       },
     ]);
-  };
+  }
+};
+  const [editingExpense, setEditingExpense] = useState(null);
   const deleteExpense = (id) => {
     setExpenses(expenses.filter((expense) => expense.id !== id));
   };
@@ -34,7 +54,7 @@ function Dashboard() {
     <DashboardLayout>
       <h1 className="text-4xl font-bold mb-6">Dashboard</h1>
 
-      <ExpenseForm addExpense={addExpense} />
+      <ExpenseForm addExpense={addExpense} editingExpense={editingExpense} />
       <div className="mb-6">
         <select
           value={filterCategory}
@@ -52,7 +72,11 @@ function Dashboard() {
           <option value="Bills">Bills</option>
         </select>
       </div>
-      <ExpenseList expenses={filteredExpenses} deleteExpense={deleteExpense} />
+      <ExpenseList
+        expenses={filteredExpenses}
+        deleteExpense={deleteExpense}
+        editExpense={setEditingExpense}
+      />
     </DashboardLayout>
   );
 }
