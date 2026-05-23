@@ -3,58 +3,18 @@ import { useEffect, useState } from "react";
 import DashboardLayout from "../layouts/DashboardLayout";
 import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
+import { useExpense } from "../context/ExpenseContext";
+import useFilterExpenses from "../hooks/useFilterExpenses";
 
 function Dashboard() {
+  const { expenses } = useExpense();
   const [filterCategory, setFilterCategory] = useState("");
-
-  const [expenses, setExpenses] = useState(() => {
-    const savedExpenses = localStorage.getItem("expenses");
-    return savedExpenses ? JSON.parse(savedExpenses) : [];
-  });
-  const filteredExpenses = filterCategory
-    ? expenses.filter((expense) => expense.category === filterCategory)
-    : expenses;
-  useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
-
-const addExpense = (expense) => {
-
-  if (editingExpense) {
-
-    setExpenses(
-      expenses.map((item) =>
-        item.id === editingExpense.id
-          ? {
-              ...item,
-              ...expense,
-            }
-          : item
-      )
-    );
-
-    setEditingExpense(null);
-
-  } else {
-
-    setExpenses([
-      ...expenses,
-      {
-        id: Date.now(),
-        ...expense,
-      },
-    ]);
-  }
-};
-  const [editingExpense, setEditingExpense] = useState(null);
-  const deleteExpense = (id) => {
-    setExpenses(expenses.filter((expense) => expense.id !== id));
-  };
+  const filteredExpenses = useFilterExpenses(expenses, filterCategory);
   return (
     <DashboardLayout>
       <h1 className="text-4xl font-bold mb-6">Dashboard</h1>
 
-      <ExpenseForm addExpense={addExpense} editingExpense={editingExpense} />
+      <ExpenseForm />
       <div className="mb-6">
         <select
           value={filterCategory}
@@ -72,11 +32,7 @@ const addExpense = (expense) => {
           <option value="Bills">Bills</option>
         </select>
       </div>
-      <ExpenseList
-        expenses={filteredExpenses}
-        deleteExpense={deleteExpense}
-        editExpense={setEditingExpense}
-      />
+      <ExpenseList expenses={filteredExpenses} />
     </DashboardLayout>
   );
 }

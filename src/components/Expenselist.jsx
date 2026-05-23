@@ -1,4 +1,6 @@
-function ExpenseList({ expenses, deleteExpense,editExpense }) {
+import { useExpense } from "../context/ExpenseContext";
+function ExpenseList() {
+  const { expenses, deleteExpense, setEditingExpense } = useExpense();
   return (
     <div className="bg-white p-6 rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-4">Recent Expenses</h2>
@@ -22,7 +24,7 @@ function ExpenseList({ expenses, deleteExpense,editExpense }) {
             </div>
 
             <button
-              onClick={() => editExpense(expense)}
+              onClick={() => setEditingExpense(expense)}
               className="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition"
             >
               Edit
