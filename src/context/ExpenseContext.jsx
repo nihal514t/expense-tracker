@@ -19,9 +19,25 @@ export function ExpenseProvider({ children }) {
 
   const addExpense = async (expense, token) => {
     try {
-      const data = await expenseService.createExpense(expense, token);
+      if (editingExpense) {
+        const updatedExpense = await expenseService.updateExpense(
+          editingExpense._id,
+          expense,
+          token,
+        );
 
-      setExpenses([...expenses, data]);
+        setExpenses(
+          expenses.map((item) =>
+            item._id === editingExpense._id ? updatedExpense : item,
+          ),
+        );
+
+        setEditingExpense(null);
+      } else {
+        const data = await expenseService.createExpense(expense, token);
+
+        setExpenses([...expenses, data]);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,6 +57,7 @@ export function ExpenseProvider({ children }) {
     <ExpenseContext.Provider
       value={{
         expenses,
+        fetchExpenses,
         addExpense,
         deleteExpense,
         editingExpense,

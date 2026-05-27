@@ -8,10 +8,19 @@ import useFilterExpenses from "../hooks/useFilterExpenses";
 import { useAuth } from "../context/AuthContext";
 
 function Dashboard() {
-  const { expenses } = useExpense();
+  const { expenses, fetchExpenses } = useExpense();
+
   const [filterCategory, setFilterCategory] = useState("");
+
   const filteredExpenses = useFilterExpenses(expenses, filterCategory);
+
   const { user } = useAuth();
+
+  useEffect(() => {
+    if (user?.token) {
+      fetchExpenses(user.token);
+    }
+  }, [user]);
   return (
     <DashboardLayout>
       <h1 className="text-4xl font-bold mb-6">Dashboard</h1>

@@ -20,6 +20,24 @@ const [category, setCategory] =
 
 const { user } =
   useAuth();
+useEffect(() => {
+
+  if (editingExpense) {
+
+    setTitle(
+      editingExpense.title
+    );
+
+    setAmount(
+      editingExpense.amount
+    );
+
+    setCategory(
+      editingExpense.category
+    );
+  }
+
+}, [editingExpense]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
