@@ -1,20 +1,25 @@
 import { useState, useEffect } from "react";
-import { useExpense } from "../context/ExpenseContext";
+
+import { useExpense }
+from "../context/ExpenseContext";
+
+import { useAuth }
+from "../context/AuthContext";
 
 function ExpenseForm() {
-  const { addExpense, editingExpense } = useExpense();
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("");
-  useEffect(() => {
-    if (editingExpense) {
-      setTitle(editingExpense.title);
+  const [title, setTitle] =
+  useState("");
 
-      setAmount(editingExpense.amount);
+const [amount, setAmount] =
+  useState("");
 
-      setCategory(editingExpense.category);
-    }
-  }, [editingExpense]);
+const [category, setCategory] =
+  useState("");
+ const { addExpense, editingExpense } =
+  useExpense();
+
+const { user } =
+  useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,12 +29,14 @@ function ExpenseForm() {
       return;
     }
 
-    addExpense({
-      title,
-      amount,
-      category,
-    });
-
+    addExpense(
+  {
+    title,
+    amount,
+    category,
+  },
+  user.token
+);
     setTitle("");
     setAmount("");
     setCategory("");

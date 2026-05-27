@@ -1,68 +1,40 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import expenseService from "../services/expenseService";
 
 const ExpenseContext = createContext();
 
 export function ExpenseProvider({ children }) {
+  const fetchExpenses = async (token) => {
+    try {
+      const data = await expenseService.getExpenses(token);
 
-  const [expenses, setExpenses] = useState(() => {
-    const savedExpenses =
-      localStorage.getItem("expenses");
+      setExpenses(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const [expenses, setExpenses] = useState([]);
 
-    return savedExpenses
-      ? JSON.parse(savedExpenses)
-      : [];
-  });
+  const [editingExpense, setEditingExpense] = useState(null);
 
-  const [editingExpense, setEditingExpense] =
-    useState(null);
+  const addExpense = async (expense, token) => {
+    try {
+      const data = await expenseService.createExpense(expense, token);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "expenses",
-      JSON.stringify(expenses)
-    );
-  }, [expenses]);
-
-  const addExpense = (expense) => {
-
-    if (editingExpense) {
-
-      setExpenses(
-        expenses.map((item) =>
-          item.id === editingExpense.id
-            ? {
-                ...item,
-                ...expense,
-              }
-            : item
-        )
-      );
-
-      setEditingExpense(null);
-
-    } else {
-
-      setExpenses([
-        ...expenses,
-        {
-          id: Date.now(),
-          ...expense,
-        },
-      ]);
+      setExpenses([...expenses, data]);
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const deleteExpense = (id) => {
-    setExpenses(
-      expenses.filter(
-        (expense) => expense.id !== id
-      )
-    );
+  const deleteExpense = async (id, token) => {
+    try {
+      await expenseService.deleteExpense(id, token);
+
+      setExpenses(expenses.filter((expense) => expense._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

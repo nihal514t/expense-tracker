@@ -1,7 +1,9 @@
 import { useExpense } from "../context/ExpenseContext";
+import { useAuth } from "../context/AuthContext";
 
 function ExpenseList({ expenses }) {
   const { deleteExpense, setEditingExpense } = useExpense();
+  const { user } = useAuth();
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-md">
@@ -33,7 +35,7 @@ function ExpenseList({ expenses }) {
             </button>
 
             <button
-              onClick={() => deleteExpense(expense.id)}
+              onClick={() => deleteExpense(expense._id, user.token)}
               className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition"
             >
               Delete
