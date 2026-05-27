@@ -5,8 +5,9 @@ const cors = require("cors");
 
 const connectDB = require("./config/db");
 
-const authRoutes =
-  require("./routes/authRoutes");
+const authRoutes = require("./routes/authRoutes");
+
+const expenseRoutes = require("./routes/expenseRoutes");
 
 const app = express();
 
@@ -19,25 +20,18 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/expenses", expenseRoutes);
 
 const startServer = async () => {
-
   try {
-
     await connectDB();
 
-    console.log(
-      "MongoDB Connected"
-    );
+    console.log("MongoDB Connected");
 
     app.listen(8000, () => {
-      console.log(
-        "Server running on port 8000"
-      );
+      console.log("Server running on port 8000");
     });
-
   } catch (error) {
-
     console.log(error);
   }
 };
