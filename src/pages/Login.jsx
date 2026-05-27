@@ -1,42 +1,34 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authService from "../services/authService";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = async (
-  e
-) => {
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  e.preventDefault();
+    if (!email || !password) {
+      alert("Fill all fields");
 
-  if (!email || !password) {
+      return;
+    }
 
-    alert("Fill all fields");
-
-    return;
-  }
-
-  try {
-
-    const user =
-      await authService.login({
+    try {
+      const user = await authService.login({
         email,
         password,
       });
 
-    console.log(user);
-
-    alert("Login Successful");
-
-  } catch (error) {
-
-    alert(
-      error.response.data.message
-    );
-  }
-};
+      setUser(user);
+      navigate("/Dashboard");
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-xl shadow-md w-[350px]">

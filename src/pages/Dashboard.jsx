@@ -5,14 +5,17 @@ import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 import { useExpense } from "../context/ExpenseContext";
 import useFilterExpenses from "../hooks/useFilterExpenses";
+import { useAuth } from "../context/AuthContext";
 
 function Dashboard() {
   const { expenses } = useExpense();
   const [filterCategory, setFilterCategory] = useState("");
   const filteredExpenses = useFilterExpenses(expenses, filterCategory);
+  const { user } = useAuth();
   return (
     <DashboardLayout>
       <h1 className="text-4xl font-bold mb-6">Dashboard</h1>
+      <h2>Welcome {user?.name}</h2>
 
       <ExpenseForm />
       <div className="mb-6">
