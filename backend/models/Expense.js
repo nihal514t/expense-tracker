@@ -22,6 +22,11 @@ const expenseSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+      enum: ["income", "expense"],
+      required: true,
+    },
   },
   {
     timestamps: true,

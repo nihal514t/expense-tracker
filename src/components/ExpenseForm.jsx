@@ -1,73 +1,81 @@
 import { useState, useEffect } from "react";
 
-import { useExpense }
-from "../context/ExpenseContext";
+import { useExpense } from "../context/ExpenseContext";
 
-import { useAuth }
-from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 function ExpenseForm() {
-  const [title, setTitle] =
-  useState("");
+  const [title, setTitle] = useState("");
 
-const [amount, setAmount] =
-  useState("");
+  const [amount, setAmount] = useState("");
 
-const [category, setCategory] =
-  useState("");
- const { addExpense, editingExpense } =
-  useExpense();
+  const [category, setCategory] = useState("");
+  const { addExpense, editingExpense } = useExpense();
+  const [type, setType] = useState("");
 
-const { user } =
-  useAuth();
-useEffect(() => {
+  const { user } = useAuth();
+  useEffect(() => {
+    if (editingExpense) {
+      setTitle(editingExpense.title);
 
-  if (editingExpense) {
+      setAmount(editingExpense.amount);
 
-    setTitle(
-      editingExpense.title
-    );
-
-    setAmount(
-      editingExpense.amount
-    );
-
-    setCategory(
-      editingExpense.category
-    );
-  }
-
-}, [editingExpense]);
+      setCategory(editingExpense.category);
+    }
+  }, [editingExpense]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!title || !amount || !category) {
+    if (!title || !amount || !category || !type) {
       alert("All fields required");
       return;
     }
 
     addExpense(
-  {
-    title,
-    amount,
-    category,
-  },
-  user.token
-);
+      {
+        title,
+        amount,
+        category,
+        type,
+      },
+      user.token,
+    );
     setTitle("");
     setAmount("");
     setCategory("");
+    setType("");
   };
+
+  const expenseCategories = [
+    "Food",
+    "Travel",
+    "Shopping",
+    "Bills",
+    "Health",
+    "Entertainment",
+  ];
+
+  const incomeCategories = [
+    "Salary",
+    "Freelance",
+    "Business",
+    "Investment",
+    "Bonus",
+  ];
+  const categories =
+  type === "income"
+    ? incomeCategories
+    : expenseCategories;
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-md mb-6">
-      <h2 className="text-2xl font-bold mb-4">Add Expense</h2>
+      <h2 className="text-2xl font-bold mb-4">Add Expense/Income</h2>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"
-          placeholder="Expense Title"
+          placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="border p-3 rounded-lg"
@@ -80,6 +88,17 @@ useEffect(() => {
           onChange={(e) => setAmount(e.target.value)}
           className="border p-3 rounded-lg"
         />
+        <select
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+          className="border p-3 rounded-lg"
+        >
+          <option value="">Select Type</option>
+
+          <option value="income">Income</option>
+
+          <option value="expense">Expense</option>
+        </select>
 
         <select
           value={category}
@@ -88,13 +107,11 @@ useEffect(() => {
         >
           <option value="">Select Category</option>
 
-          <option value="Food">Food</option>
-
-          <option value="Travel">Travel</option>
-
-          <option value="Shopping">Shopping</option>
-
-          <option value="Bills">Bills</option>
+          {categories.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
         </select>
 
         <button className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">

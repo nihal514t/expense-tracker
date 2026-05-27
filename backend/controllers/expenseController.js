@@ -16,19 +16,20 @@ const getExpenses = async (req, res) => {
 
 const createExpense = async (req, res) => {
   try {
-    const { title, amount, category } = req.body;
+    const { title, amount, category,type, } = req.body;
 
     const expense = await Expense.create({
       user: req.user._id,
       title,
       amount,
       category,
+      type,
     });
 
     res.status(201).json(expense);
   } catch (error) {
     res.status(500).json({
-      message: "Server Error",
+      message: error.message,
     });
   }
 };
