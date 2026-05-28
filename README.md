@@ -1,19 +1,19 @@
 # Expense Tracker
 
-A modern full-stack Expense Tracker application built using the MERN stack with JWT authentication, expense analytics, reports, and responsive Apple-inspired dashboard UI.
+A modern full-stack Expense Tracker application built using the MERN stack with JWT authentication, expense analytics, interactive reports, and an Apple-inspired responsive dashboard UI.
 
 ---
 
-## Features
+# Features
 
-### Authentication
+## Authentication
 
 * User Signup & Login
 * JWT Authentication
 * Protected Routes
 * Persistent Login using Local Storage
 
-### Expense Management
+## Expense Management
 
 * Add Income & Expenses
 * Edit Transactions
@@ -21,7 +21,7 @@ A modern full-stack Expense Tracker application built using the MERN stack with 
 * Category Filtering
 * Multi-user Expense Isolation
 
-### Dashboard
+## Dashboard
 
 * Total Income Calculation
 * Total Expense Calculation
@@ -29,13 +29,13 @@ A modern full-stack Expense Tracker application built using the MERN stack with 
 * Recent Transactions
 * Responsive Dashboard Cards
 
-### Reports
+## Reports
 
 * Expense Analytics
 * Category Breakdown
-* Charts using Recharts
+* Interactive Charts using Recharts
 
-### UI/UX
+## UI/UX
 
 * Apple-inspired UI Design
 * Glassmorphism Effects
@@ -45,9 +45,9 @@ A modern full-stack Expense Tracker application built using the MERN stack with 
 
 ---
 
-## Tech Stack
+# Tech Stack
 
-### Frontend
+## Frontend
 
 * React.js
 * Vite
@@ -57,7 +57,7 @@ A modern full-stack Expense Tracker application built using the MERN stack with 
 * Recharts
 * Lucide React
 
-### Backend
+## Backend
 
 * Node.js
 * Express.js
@@ -68,61 +68,87 @@ A modern full-stack Expense Tracker application built using the MERN stack with 
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```bash
 expense-tracker/
 │
 ├── backend/
+│   ├── config/
 │   ├── controllers/
 │   ├── middleware/
 │   ├── models/
 │   ├── routes/
-│   ├── config/
+│   ├── .env
+│   ├── package.json
 │   └── server.js
 │
-├── src/
-│   ├── components/
-│   ├── context/
-│   ├── hooks/
-│   ├── layouts/
-│   ├── pages/
-│   ├── services/
-│   └── utils/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── hooks/
+│   │   ├── layouts/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   ├── eslint.config.js
+│   └── index.html
 │
-├── public/
-├── package.json
-└── vite.config.js
+├── screenshots/
+│   ├── dashboard.png
+│   ├── reports.png
+│   └── authentication.png
+│
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-## Installation
+# Installation
 
-### Clone Repository
+## Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/expense-tracker.git
+git clone https://github.com/nihal514t/expense-tracker.git
 ```
 
-### Install Frontend Dependencies
+---
+
+# Frontend Setup
 
 ```bash
+cd frontend
+
 npm install
+
+npm run dev
 ```
 
-### Install Backend Dependencies
+---
+
+# Backend Setup
 
 ```bash
 cd backend
+
 npm install
+
+npm run dev
 ```
 
 ---
 
-## Environment Variables
+# Environment Variables
 
-Create a `.env` file inside `backend/`
+Create a `.env` file inside the `backend/` folder.
 
 ```env
 MONGO_URI=your_mongodb_connection_string
@@ -134,40 +160,27 @@ PORT=8000
 
 ---
 
-## Run Frontend
+# Screenshots
 
-```bash
-npm run dev
-```
+## Dashboard
 
----
-
-## Run Backend
-
-```bash
-cd backend
-npm run dev
-```
+![Dashboard](./screenshots/dashboard.png)
 
 ---
 
-## Screenshots
+## Reports
 
-### Dashboard
-
-./screenshots/dashboard.png
-
-### Reports
-
-./screenshots/reports.png
-
-### Authentication
-
-./screenshots/authentication.png
+![Reports](./screenshots/reports.png)
 
 ---
 
-## Future Improvements
+## Authentication
+
+![Authentication](./screenshots/authentication.png)
+
+---
+
+# Future Improvements
 
 * Dark Mode
 * PDF Export
@@ -180,7 +193,7 @@ npm run dev
 
 ---
 
-## Author
+# Author
 
 Muhammed Nihal
 
@@ -189,6 +202,6 @@ https://github.com/nihal514t
 
 ---
 
-## License
+# License
 
-This project is created by me for my educational purpose and my portfolio
+This project was created for educational purposes and personal portfolio use.
