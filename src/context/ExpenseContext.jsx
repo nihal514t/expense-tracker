@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import expenseService from "../services/expenseService";
+import { useAuth } from "./AuthContext";
 
 const ExpenseContext = createContext();
 
 export function ExpenseProvider({ children }) {
+  const { user } = useAuth();
   const fetchExpenses = async (token) => {
     try {
       const data = await expenseService.getExpenses(token);
@@ -14,6 +16,11 @@ export function ExpenseProvider({ children }) {
     }
   };
   const [expenses, setExpenses] = useState([]);
+  useEffect(() => {
+    if (!user) {
+      setExpenses([]);
+    }
+  }, [user]);
 
   const [editingExpense, setEditingExpense] = useState(null);
 

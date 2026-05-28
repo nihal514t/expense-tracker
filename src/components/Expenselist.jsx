@@ -16,7 +16,7 @@ function ExpenseList({ expenses }) {
 
         {expenses.map((expense) => (
           <div
-            key={expense.id}
+            key={expense._id}
             className="flex items-center justify-between border p-4 rounded-lg"
           >
             <div>

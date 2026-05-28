@@ -1,93 +1,89 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Signup() {
-  const [userName,setUserName] = useState("");
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
-  const [confirmPassword,setConfirmPassword] = useState("");
-  const handleSignup = (e) => {
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const { register } = useAuth();
 
-  e.preventDefault();
+  const navigate = useNavigate();
+  const handleSignup = async (e) => {
+    e.preventDefault();
 
-  if (!userName || !email || !password || !confirmPassword) {
-  alert("All fields are required");
-  return;
-}
+    if (!userName || !email || !password || !confirmPassword) {
+      alert("All fields are required");
+      return;
+    }
 
-   if (password !== confirmPassword) {
-  alert("Passwords do not match");
-  return;
-}
-  console.log(userName);
-  console.log(email);
-  console.log(password);
-  console.log(confirmPassword);
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    try {
+      await register({
+        name: userName,
+        email,
+        password,
+      });
 
-};
-  
+      navigate("/dashboard");
+    } catch (error) {
+      alert(error.response?.data?.message || "Signup failed");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-xl shadow-md w-[350px]">
-        
-        <h1 className="text-3xl font-bold text-center mb-6">
-          Sign Up
-        </h1>
+        <h1 className="text-3xl font-bold text-center mb-6">Sign Up</h1>
 
         <form onSubmit={handleSignup} className="flex flex-col gap-4">
-
-
-           <input
+          <input
             type="text"
             placeholder="Enter Username"
             value={userName}
-            onChange={(e)=>setUserName(e.target.value)}
+            onChange={(e) => setUserName(e.target.value)}
             className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          
+
           <input
             type="email"
             placeholder="Enter email"
             value={email}
-            onChange={(e)=>setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
 
           <input
             type="password"
             placeholder="Enter password"
-             value={password}
-            onChange={(e)=>setPassword(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-           
-           <input
+
+          <input
             type="password"
             placeholder="Confirm password"
-             value={confirmPassword}
-            onChange={(e)=>setConfirmPassword(e.target.value)}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
 
-          <button
-            className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition"
-          >
+          <button className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
             Sign Up
           </button>
-
         </form>
 
-       <p className="text-center mt-4">
-  Already have an account?{" "}
-  <Link
-    to="/"
-    className="text-blue-600 hover:underline"
-  >
-    Login
-  </Link>
-</p>
-
+        <p className="text-center mt-4">
+          Already have an account?{" "}
+          <Link to="/" className="text-blue-600 hover:underline">
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );
