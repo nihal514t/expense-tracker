@@ -17,17 +17,6 @@ function Expenses() {
       <h1 className="text-4xl font-bold mb-6">Transactions</h1>
 
       <ExpenseForm />
-
-      <div className="mb-6">
-        <select
-          value={filterCategory}
-          onChange={(e) => setFilterCategory(e.target.value)}
-          className="border p-3 rounded-lg bg-white"
-        >
-          <option value="">All Categories</option>
-        </select>
-      </div>
-
       <ExpenseList expenses={filteredExpenses} />
     </DashboardLayout>
   );
