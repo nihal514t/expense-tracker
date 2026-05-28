@@ -16,14 +16,14 @@ function Sidebar() {
         </Link>
 
         <Link
-          to="/dashboard"
+          to="/expenses"
           className="hover:bg-gray-700 p-3 rounded-lg transition"
         >
           Expenses
         </Link>
 
         <Link
-          to="/dashboard"
+          to="/reports"
           className="hover:bg-gray-700 p-3 rounded-lg transition"
         >
           Reports

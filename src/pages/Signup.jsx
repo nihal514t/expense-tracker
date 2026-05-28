@@ -10,7 +10,7 @@ function Signup() {
 
   e.preventDefault();
 
-  if (!userName || !email || !password || !cnfrmPassword) {
+  if (!userName || !email || !password || !confirmPassword) {
   alert("All fields are required");
   return;
 }
