@@ -1,42 +1,154 @@
-import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import {
+  Link,
+  useLocation,
+} from "react-router-dom";
 
-function Sidebar() {
-  const { user, logout } = useAuth();
+import {
+  LayoutDashboard,
+  Wallet,
+  BarChart3,
+  LogOut,
+} from "lucide-react";
+
+import {
+  useAuth,
+} from "../context/AuthContext";
+
+function Sidebar({
+  isOpen,
+}) {
+
+  const { logout } =
+    useAuth();
+
+  const location =
+    useLocation();
+
+  const navItems = [
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: LayoutDashboard,
+    },
+    {
+      name: "Expenses",
+      path: "/expenses",
+      icon: Wallet,
+    },
+    {
+      name: "Reports",
+      path: "/reports",
+      icon: BarChart3,
+    },
+  ];
+
   return (
-    <aside className="w-64 min-h-screen bg-gray-900 text-white p-6">
-      <h2 className="text-2xl font-bold mb-8">Menu</h2>
 
-      <div className="flex flex-col gap-4">
-        <Link
-          to="/dashboard"
-          className="hover:bg-gray-700 p-3 rounded-lg transition"
-        >
-          Dashboard
-        </Link>
+    <aside
+      className={`fixed top-16 left-0 h-[calc(100vh-64px)] bg-white/70 backdrop-blur-2xl border-r border-black/5 shadow-sm transition-all duration-300 z-40 flex flex-col ${
+        isOpen
+          ? "w-64"
+          : "w-20"
+      }`}
+    >
 
-        <Link
-          to="/expenses"
-          className="hover:bg-gray-700 p-3 rounded-lg transition"
-        >
-          Expenses
-        </Link>
+      <div className="flex-1 px-3 py-6">
 
-        <Link
-          to="/reports"
-          className="hover:bg-gray-700 p-3 rounded-lg transition"
-        >
-          Reports
-        </Link>
+        <nav className="flex flex-col gap-2">
+
+          {navItems.map(
+            (item) => {
+
+              const active =
+                location.pathname ===
+                item.path;
+
+              const Icon =
+                item.icon;
+
+              return (
+
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`group relative flex items-center rounded-2xl px-4 py-3 transition-all duration-300 overflow-hidden ${
+                    active
+                      ? "bg-black text-white shadow-md"
+                      : "text-gray-700 hover:bg-black/5"
+                  } ${
+                    isOpen
+                      ? "justify-start gap-4"
+                      : "justify-center"
+                  }`}
+                >
+
+                  <Icon
+                    size={20}
+                    strokeWidth={2}
+                    className={`transition-all duration-300 ${
+                      active
+                        ? "text-white"
+                        : "text-gray-600 group-hover:text-black"
+                    }`}
+                  />
+
+                  <div
+                    className={`transition-all duration-300 whitespace-nowrap ${
+                      isOpen
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 translate-x-4 absolute"
+                    }`}
+                  >
+
+                    <span className="font-medium text-sm tracking-tight">
+
+                      {item.name}
+
+                    </span>
+
+                  </div>
+
+                </Link>
+              );
+            }
+          )}
+
+        </nav>
+
       </div>
-      <div className="mt-auto pt-6">
+
+      <div className="p-3 border-t border-black/5">
+
         <button
           onClick={logout}
-          className="bg-red-500 w-full py-2 rounded-lg hover:bg-red-600 transition"
+          className={`w-full rounded-2xl bg-red-500 text-white py-3 flex items-center transition-all duration-300 hover:bg-red-600 ${
+            isOpen
+              ? "justify-start gap-4 px-4"
+              : "justify-center"
+          }`}
         >
-          Logout
+
+          <LogOut
+            size={20}
+            strokeWidth={2}
+          />
+
+          <div
+            className={`transition-all duration-300 whitespace-nowrap ${
+              isOpen
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-4 absolute"
+            }`}
+          >
+
+            Logout
+
+          </div>
+
         </button>
+
       </div>
+
     </aside>
   );
 }

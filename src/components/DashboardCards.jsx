@@ -1,3 +1,9 @@
+import {
+  ArrowDownCircle,
+  ArrowUpCircle,
+  Wallet,
+} from "lucide-react";
+
 function DashboardCards({
   expenses,
 }) {
@@ -27,46 +33,86 @@ function DashboardCards({
       );
 
   const balance =
-    totalIncome - totalExpense;
+    totalIncome -
+    totalExpense;
+
+  const cards = [
+    {
+      title: "Income",
+      value: totalIncome,
+      icon: ArrowDownCircle,
+      color:
+        "from-emerald-500/90 to-emerald-400/80",
+    },
+    {
+      title: "Expenses",
+      value: totalExpense,
+      icon: ArrowUpCircle,
+      color:
+        "from-red-500/90 to-rose-400/80",
+    },
+    {
+      title: "Balance",
+      value: balance,
+      icon: Wallet,
+      color:
+        "from-blue-500/90 to-indigo-400/80",
+    },
+  ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
 
-      <div className="bg-green-500 text-white p-6 rounded-xl shadow-md">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
-        <h2 className="text-xl font-bold mb-2">
-          Total Income
-        </h2>
+      {cards.map(
+        (card) => {
 
-        <p className="text-3xl font-bold">
-          ₹{totalIncome}
-        </p>
+          const Icon =
+            card.icon;
 
-      </div>
+          return (
 
-      <div className="bg-red-500 text-white p-6 rounded-xl shadow-md">
+            <div
+              key={card.title}
+              className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${card.color} p-6 shadow-lg hover:scale-[1.02] transition-all duration-300`}
+            >
 
-        <h2 className="text-xl font-bold mb-2">
-          Total Expense
-        </h2>
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-xl" />
 
-        <p className="text-3xl font-bold">
-          ₹{totalExpense}
-        </p>
+              <div className="relative z-10 flex items-start justify-between">
 
-      </div>
+                <div>
 
-      <div className="bg-blue-500 text-white p-6 rounded-xl shadow-md">
+                  <p className="text-white/80 text-sm font-medium tracking-wide">
 
-        <h2 className="text-xl font-bold mb-2">
-          Balance
-        </h2>
+                    {card.title}
 
-        <p className="text-3xl font-bold">
-          ₹{balance}
-        </p>
+                  </p>
 
-      </div>
+                  <h2 className="text-4xl font-semibold text-white mt-3 tracking-tight">
+
+                    ₹{card.value}
+
+                  </h2>
+
+                </div>
+
+                <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center backdrop-blur-md">
+
+                  <Icon
+                    size={28}
+                    className="text-white"
+                    strokeWidth={2}
+                  />
+
+                </div>
+
+              </div>
+
+            </div>
+          );
+        }
+      )}
 
     </div>
   );

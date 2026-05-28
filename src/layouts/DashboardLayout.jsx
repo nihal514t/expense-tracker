@@ -1,20 +1,26 @@
+import { useState } from "react";
+
 import Navbar from "../components/Navbar";
+
 import Sidebar from "../components/Sidebar";
 
 function DashboardLayout({ children }) {
+  const [isOpen, setIsOpen] = useState(true);
+
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="h-screen overflow-hidden bg-[#f5f5f7]">
+      <Navbar isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      <Navbar />
+      <div className="flex pt-16 h-screen">
+        <Sidebar isOpen={isOpen} />
 
-      <div className="flex">
-
-        <Sidebar />
-
-        <main className="flex-1 p-8">
-          {children}
+        <main
+          className={`flex-1 overflow-y-auto transition-all duration-300 ${
+            isOpen ? "ml-64" : "ml-20"
+          }`}
+        >
+          <div className="p-8">{children}</div>
         </main>
-
       </div>
     </div>
   );

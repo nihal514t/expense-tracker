@@ -1,36 +1,37 @@
-import { Link, useNavigate } from "react-router-dom";
+import { PanelLeft, Search, Bell } from "lucide-react";
 
 import { useAuth } from "../context/AuthContext";
 
-function Navbar() {
-  const navigate = useNavigate();
+function Navbar({ isOpen, setIsOpen }) {
+  const { user } = useAuth();
 
-  const { logout } = useAuth();
-  const handleLogout = () => {
-    logout();
-
-    navigate("/");
-  };
   return (
-    <nav className="bg-white shadow-md px-6 py-4 flex items-center justify-between">
-      <h1 className="text-2xl font-bold text-blue-600">Expense Tracker</h1>
+    <header className="fixed top-0 left-0 right-0 h-16 z-50 bg-white/70 backdrop-blur-2xl border-b border-black/5">
+      <div className="h-full px-6 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-10 h-10 rounded-2xl flex items-center justify-center hover:bg-black/5 transition-all duration-300 active:scale-95"
+          >
+            <PanelLeft size={20} strokeWidth={2} className="text-gray-700" />
+          </button>
 
-      <div className="flex items-center gap-4">
-        <Link
-          to="/dashboard"
-          className="text-gray-700 hover:text-blue-600 transition"
-        >
-          Dashboard
-        </Link>
+          <div className="flex flex-col leading-tight">
+            <span className="text-[15px] font-semibold tracking-tight text-gray-900">
+              Expense Tracker
+            </span>
 
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
-        >
-          Logout
-        </button>
+            <span className="text-xs text-gray-500">Finance Dashboard</span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="h-10 px-4 rounded-2xl bg-black text-white flex items-center justify-center text-sm font-medium shadow-sm">
+            {user?.name?.charAt(0)}
+          </div>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 }
 
