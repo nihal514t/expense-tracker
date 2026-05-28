@@ -1,6 +1,7 @@
 # Expense Tracker
 
-A modern full-stack Expense Tracker application built using the MERN stack with JWT authentication, expense analytics, interactive reports, and an Apple-inspired responsive dashboard UI.
+A modern expense tracker application built using the MERN stack with secure JWT authentication, expense analytics, interactive reports, and a clean responsive dashboard inspired by Apple design.
+
 
 ---
 
