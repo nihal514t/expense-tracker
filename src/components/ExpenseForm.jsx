@@ -115,7 +115,7 @@ function ExpenseForm() {
         </select>
 
         <button className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
-          Add Expense
+          Add Expense/Income
         </button>
       </form>
     </div>

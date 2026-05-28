@@ -22,7 +22,7 @@ function ExpenseList({ expenses }) {
             <div>
               <h3 className="font-semibold">{expense.title}</h3>
 
-              <p className="text-red-500 font-bold">₹{expense.amount}</p>
+              <p className="text-blue-500 font-bold">₹{expense.amount}</p>
 
               <p className="text-sm text-gray-500">{expense.category}</p>
             </div>
