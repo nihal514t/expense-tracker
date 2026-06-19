@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/expenses`;
+console.log(import.meta.env.VITE_API_URL);
 
 
 const getExpenses = async (token) => {

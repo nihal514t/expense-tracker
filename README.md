@@ -2,6 +2,15 @@
 
 A modern expense tracker application built using the MERN stack with secure JWT authentication, expense analytics, interactive reports, and a clean responsive dashboard inspired by Apple design.
 
+---
+
+# Live Demo
+
+Frontend: https://expense-tracker-y91r.vercel.app
+
+Backend: https://expense-tracker-demo-vms8.onrender.com
+
+GitHub Repository: https://github.com/nihal514t/expense-tracker
 
 ---
 
@@ -65,13 +74,29 @@ A modern expense tracker application built using the MERN stack with secure JWT 
 * MongoDB Atlas
 * Mongoose
 * JWT Authentication
-* bcrypt.js
+* bcryptjs
+
+---
+
+# Screenshots
+
+## Dashboard
+
+![Dashboard](./screenshots/dashboard.png)
+
+## Reports
+
+![Reports](./screenshots/reports.png)
+
+## Authentication
+
+![Authentication](./screenshots/authentication.png)
 
 ---
 
 # Project Structure
 
-```bash
+```text
 expense-tracker/
 │
 ├── backend/
@@ -80,7 +105,6 @@ expense-tracker/
 │   ├── middleware/
 │   ├── models/
 │   ├── routes/
-│   ├── .env
 │   ├── package.json
 │   └── server.js
 │
@@ -97,9 +121,7 @@ expense-tracker/
 │   │   └── main.jsx
 │   │
 │   ├── package.json
-│   ├── package-lock.json
 │   ├── vite.config.js
-│   ├── eslint.config.js
 │   └── index.html
 │
 ├── screenshots/
@@ -119,23 +141,13 @@ expense-tracker/
 
 ```bash
 git clone https://github.com/nihal514t/expense-tracker.git
+
+cd expense-tracker
 ```
 
 ---
 
-# Frontend Setup
-
-```bash
-cd frontend
-
-npm install
-
-npm run dev
-```
-
----
-
-# Backend Setup
+## Backend Setup
 
 ```bash
 cd backend
@@ -145,39 +157,74 @@ npm install
 npm run dev
 ```
 
----
-
-# Environment Variables
-
-Create a `.env` file inside the `backend/` folder.
+Create a `.env` file inside the backend folder:
 
 ```env
+PORT=8000
+
 MONGO_URI=your_mongodb_connection_string
 
 JWT_SECRET=your_secret_key
-
-PORT=8000
 ```
 
 ---
 
-# Screenshots
+## Frontend Setup
 
-## Dashboard
+```bash
+cd frontend
 
-![Dashboard](./screenshots/dashboard.png)
+npm install
+
+npm run dev
+```
+
+Create a `.env` file inside the frontend folder:
+
+```env
+VITE_API_URL=http://localhost:8000/api
+```
 
 ---
 
-## Reports
+# Environment Variables
 
-![Reports](./screenshots/reports.png)
+## Backend
+
+```env
+PORT=8000
+
+MONGO_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_secret_key
+```
+
+## Frontend
+
+```env
+VITE_API_URL=http://localhost:8000/api
+```
 
 ---
 
-## Authentication
+# Implemented Features
 
-![Authentication](./screenshots/authentication.png)
+* User Authentication
+* Protected Routes
+* Persistent Login Sessions
+* Add Income
+* Add Expenses
+* Edit Transactions
+* Delete Transactions
+* Expense Categorization
+* Dashboard Overview
+* Income Tracking
+* Expense Tracking
+* Interactive Reports
+* Charts and Analytics
+* Responsive Design
+* JWT Security
+* MongoDB Integration
 
 ---
 
@@ -191,18 +238,26 @@ PORT=8000
 * User Profile Settings
 * Pagination
 * Budget Goals
+* Data Export
+* Multi-Currency Support
 
 ---
 
 # Author
 
-Muhammed Nihal
+### Muhammed Nihal P
 
 GitHub:
 https://github.com/nihal514t
+
+LinkedIn:
+https://www.linkedin.com/in/nihal514t/
+
+Live Demo:
+https://expense-tracker-y91r.vercel.app
 
 ---
 
 # License
 
-This project was created for educational purposes and personal portfolio use.
+This project was created for educational purposes and portfolio demonstration.
