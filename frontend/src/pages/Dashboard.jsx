@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 import ExpenseForm from "../components/ExpenseForm";
-import ExpenseList from "../components/ExpenseList";
+import ExpenseList from "../components/Expenselist";
 import { useExpense } from "../context/ExpenseContext";
 import useFilterExpenses from "../hooks/useFilterExpenses";
 import { useAuth } from "../context/AuthContext";
