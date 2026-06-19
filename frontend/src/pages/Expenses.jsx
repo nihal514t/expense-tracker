@@ -1,6 +1,6 @@
 import DashboardLayout from "../layouts/DashboardLayout";
 import ExpenseForm from "../components/ExpenseForm";
-import ExpenseList from "../components/ExpenseList";
+import ExpenseList from "../components/Expenselist";
 import { useExpense } from "../context/ExpenseContext";
 import { useState } from "react";
 import useFilterExpenses from "../hooks/useFilterExpenses";
